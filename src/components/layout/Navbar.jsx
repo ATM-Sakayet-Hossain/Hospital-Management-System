@@ -20,6 +20,12 @@ const Navbar = () => {
               onToggle={() => toggleMenu("diagnostic")}
               subItems={[{ title: "Invoice" }, { title: "Due Collection" }]}
             />
+            <MenuItem
+              title="Emergency"
+              open={openMenus.Emergency}
+              onToggle={() => toggleMenu("Emergency")}
+              subItems={[{ title: "Invoice" }, { title: "Due Collection" }]}
+            />
           </ul>
         </div>
       </nav>

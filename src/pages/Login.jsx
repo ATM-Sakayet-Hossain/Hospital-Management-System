@@ -56,7 +56,7 @@ const Login = () => {
       <ToastContainer position="top-right" theme="light" />
       <div className="w-full max-w-lg px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
         <div className="flex items-center space-x-5 justify-center">
-          <h2 className="text-4xl font-bold text-blue-400">Saynex</h2>
+          <h2 className="text-4xl font-bold text-blue-400">SSJH Hospital</h2>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="mt-5">

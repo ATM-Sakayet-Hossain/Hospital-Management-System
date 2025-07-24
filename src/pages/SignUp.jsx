@@ -73,7 +73,7 @@ const SignUp = () => {
       <div className="w-full max-w-lg bg-white shadow-xl rounded-2xl px-8 py-10">
         <div className=" text-center mb-8">
           <div className="inline-block bg-[#0275a6] text-white text-xl font-bold py-2 px-6 rounded-full mb-4">
-            Saynex
+            SSJH Hospital
           </div>
           <h2 className="text-2xl font-semibold text-[#1a1a68]">
             Sign up in seconds and start chatting!
@@ -96,7 +96,7 @@ const SignUp = () => {
                 setUserData((prev) => ({ ...prev, email: e.target.value }))
               }
               type="email"
-              placeholder="you@saynex.com"
+              placeholder="you@SSJH Hospital.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
