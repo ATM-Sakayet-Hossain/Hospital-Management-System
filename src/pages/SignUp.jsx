@@ -73,14 +73,11 @@ const SignUp = () => {
       <div className="w-full max-w-lg bg-white shadow-xl rounded-2xl px-8 py-10">
         <div className=" text-center mb-8">
           <div className="inline-block bg-[#0275a6] text-white text-xl font-bold py-2 px-6 rounded-full mb-4">
-            SSJH Hospital
+            Sakkhor Hospital
           </div>
           <h2 className="text-2xl font-semibold text-[#1a1a68]">
-            Sign up in seconds and start chatting!
+            Hospital Management System
           </h2>
-          <p className="text-sm text-gray-500">
-            It's free to join — enjoy chatting instantly!
-          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
