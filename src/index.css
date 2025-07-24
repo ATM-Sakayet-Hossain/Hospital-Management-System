@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body{
+  background: rgba(73, 73, 239, 0.559);
+}
+
+@theme{
+  --font-inter: "Inter", sans-serif;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
