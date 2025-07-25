@@ -10,10 +10,12 @@ const Layout = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Header />
-      <Navbar />
-      <Outlet />
+      <div className="flex gap-2 bg-gray-100">
+        <Navbar />
+        <Outlet />
+      </div>
     </div>
   );
 };
