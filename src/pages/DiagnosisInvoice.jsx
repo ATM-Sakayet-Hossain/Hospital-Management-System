@@ -1,8 +1,22 @@
 import React, { useState } from "react";
+import { MdDelete } from "react-icons/md";
 
 const DiagnosisInvoice = () => {
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState(today);
+  const [openMenus, setOpenMenus] = useState(false);
+  const [Donar, setDonar] = useState(false);
+  const [openCash, setOpenCash] = useState({ Cash: true });
+
+  const toggleCash = (menu) => {
+    if (menu === "Cash") {
+      setOpenCash({ Cash: true });
+    } else if (menu === "Card") {
+      setOpenCash({ Card: true });
+    } else if (menu === "Cheque") {
+      setOpenCash({ Cheque: true });
+    }
+  };
   return (
     <>
       <div className="w-full flex gap-2">
@@ -26,16 +40,17 @@ const DiagnosisInvoice = () => {
                   </div>
                   <div className="w-4/12 flex items-center gap-2">
                     <label className="text-base text-end w-4/12 font-semibold">
-                      Patient Id 
+                      Patient Id
                     </label>
                     <input type="text" className="form-control w-8/12" />
                   </div>
-                  <span className="w-2/12 tex-base flex items-center gap-2">
+                  <span className="w-2/12 text-base flex items-center gap-2">
                     <label className=" font-semibold">
-                      Donar <input type="checkbox" />
+                      Donar <input onChange={() => setDonar(!Donar)} checked={Donar} type="checkbox" />
                     </label>
                     <label className=" font-semibold">
-                      Baby of <input type="checkbox" />
+                      Baby of
+                      <input type="checkbox" />
                     </label>
                   </span>
                   <div className="w-2/12">
@@ -145,6 +160,35 @@ const DiagnosisInvoice = () => {
                     <input type="text" className="form-control w-8/12" />
                   </div>
                 </div>
+                {/* Donar Name */}
+                {Donar && (
+                  <div onClick={()=> setDonar(true)} className="flex items-center gap-5 w-full pl-15 pt-2">
+                    <div className="w-4/12 flex items-center gap-2">
+                      <label className="w-4/12 text-base text-end font-semibold">
+                        Donor Name
+                      </label>
+                      <input type="text" className="form-control w-8/12" />
+                    </div>
+                    <div className="w-4/12 flex items-center gap-2">
+                      <label className="w-4/12 text-base text-end font-semibold">
+                        Donor Age
+                      </label>
+                      <input type="text" className="form-control w-8/12" />
+                    </div>
+                    <div className="w-4/12 flex items-center gap-2">
+                      <label className="text-base text-end w-4/12 font-semibold">
+                        Gender
+                      </label>
+                      <select className="form-control w-8/12">
+                        <option value="Select">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+                {/* Donar Name */}
                 <div className="flex items-center gap-5 w-full pl-15 pt-2">
                   <div className="w-full flex items-center gap-2">
                     <label className="text-base text-end w-[120px] font-semibold">
@@ -211,7 +255,7 @@ const DiagnosisInvoice = () => {
                           />
                         </th>
                         <th className="pb-2 pl-2 text-center">
-                          <button className=" bg-white text-black px-4 py-1 rounded-lg">
+                          <button className="w-fit m-auto text-center text-base font-bold bg-white px-3 py-1 rounded-[4px] text-black">
                             Add
                           </button>
                         </th>
@@ -252,36 +296,59 @@ const DiagnosisInvoice = () => {
         </div>
         {/* Invoice part end */}
         {/* Payment part start */}
-        <div className="w-3/12 rounded-lg">
-          <div className="p-6 bg-white rounded-lg shadow-lg">
-            <h1 className="w-full text-lg text-center border-t-[2px] border-b-[1px]">
+        <div className="w-3/12 p-6 bg-white rounded-lg shadow-lg">
+          <div>
+            <h1 className="w-full text-lg text-center font-bold border-t-[2px] border-b-[1px]">
               Payment
             </h1>
             <div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Grand Total</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Grand Total
+                </label>
                 <div className="w-9/12">
-                  <input type="text" value={0} readOnly className="form-control w-full px-2 bg-gray-100" />
+                  <input
+                    type="text"
+                    value={0}
+                    readOnly
+                    className="form-control w-full px-2 bg-gray-100"
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base text-red-600 font-semibold">
+                <label className="w-5/12 text-end text-base text-red-600 font-semibold">
                   Fixed Less
                 </label>
                 <div className="w-9/12">
-                  <input type="text" value={0} readOnly className="form-control w-full bg-gray-100" />
+                  <input
+                    type="text"
+                    value={0}
+                    readOnly
+                    className="form-control w-full bg-gray-100"
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Grand Less</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Grand Less
+                </label>
                 <div className="w-9/12">
-                  <input type="text" className="form-control w-full" />
+                  <input
+                    onClick={() => setOpenMenus(true)}
+                    type="text"
+                    className="form-control w-full"
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Less</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Less
+                </label>
                 <div className="w-9/12 flex items-center gap-2">
-                  <input type="text" className="text-base w-6/12 form-control" />
+                  <input
+                    type="text"
+                    className="text-base w-6/12 form-control"
+                  />
                   <select className="w-6/12 form-control">
                     <option value="%">%</option>
                     <option value="TK">TK</option>
@@ -289,14 +356,18 @@ const DiagnosisInvoice = () => {
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Less From</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Less From
+                </label>
                 <div className="w-9/12">
                   <select className="w-full form-control">
                     <option value="Select">Select</option>
                     <option value="Director">Director</option>
                     <option value="Asst. Director">Asst. Director</option>
                     <option value="General Manager">General Manager</option>
-                    <option value="Asst. General Manager">Asst. General Manager</option>
+                    <option value="Asst. General Manager">
+                      Asst. General Manager
+                    </option>
                     <option value="Manager">Manager</option>
                     <option value="Asst. Manager">Asst. Manager</option>
                     <option value="Doctor">Doctor</option>
@@ -304,34 +375,393 @@ const DiagnosisInvoice = () => {
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Total Less</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Total Less
+                </label>
                 <div className="w-9/12">
-                  <input type="text" value={0} readOnly className="form-control w-full bg-gray-100" />
+                  <input
+                    type="text"
+                    value={0}
+                    readOnly
+                    className="form-control w-full bg-gray-100"
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Extra Less</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Extra Less
+                </label>
                 <div className="w-9/12">
                   <input type="text" className="form-control w-full" />
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Grand Less</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Grand Less
+                </label>
                 <div className="w-9/12">
-                  <input type="text" value={0} readOnly className="form-control w-full bg-gray-100" />
+                  <input
+                    type="text"
+                    value={0}
+                    readOnly
+                    className="form-control w-full bg-gray-100"
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-start gap-4 w-full pt-2">
-                <label className="w-3/12 text-end text-base font-semibold">Payable</label>
+                <label className="w-5/12 text-end text-base font-semibold">
+                  Payable
+                </label>
                 <div className="w-9/12">
-                  <input type="text" value={0} readOnly className="form-control w-full bg-gray-100" />
+                  <input
+                    type="text"
+                    value={0}
+                    readOnly
+                    className="form-control w-full bg-gray-100"
+                  />
                 </div>
               </div>
             </div>
+            <div className="w-full pt-2">
+              <div className="flex justify-around w-full text-lg font-bold text-center border-t-[2px] border-b-[1px] px-10">
+                <button
+                  type="button"
+                  onClick={() => toggleCash("Cash")}
+                  className={openCash.Cash ? "active" : ""}
+                >
+                  Cash
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleCash("Card")}
+                  className={openCash.Card ? "active" : ""}
+                >
+                  Card
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleCash("Cheque")}
+                  className={openCash.Cheque ? "active" : ""}
+                >
+                  Cheque
+                </button>
+              </div>
+              {openCash.Cash && (
+                <div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Receive Amount
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      placeholder="0"
+                      min={0}
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Cash Amount
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Change Amount
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control text-red-400 w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Total Amount
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Due Amount
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control text-red-400 w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                </div>
+              )}
+              {openCash.Card && (
+                <div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Card Amount
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      placeholder="0"
+                      min={0}
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Card No
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      placeholder="0254 1234 5678 9012"
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Card Bank
+                    </label>
+                    <select className="form-control text-red-400 w-9/12 px-2 bg-gray-100">
+                      <option value="Select">Select</option>
+                      <option value="Bank A">Bank A</option>
+                      <option value="Bank B">Bank B</option>
+                      <option value="Bank C">Bank C</option>
+                      <option value="Bank D">Bank D</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Total Receive
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Due Amount
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control text-red-400 w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                </div>
+              )}
+              {openCash.Cheque && (
+                <div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Cheque Amount
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      placeholder="0"
+                      min={0}
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Cheque No
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      placeholder="1234567890"
+                      min={0}
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Cheque Bank
+                    </label>
+                    <select className="form-control text-red-400 w-9/12 px-2 bg-gray-100">
+                      <option value="Select">Select</option>
+                      <option value="Bank A">Bank A</option>
+                      <option value="Bank B">Bank B</option>
+                      <option value="Bank C">Bank C</option>
+                      <option value="Bank D">Bank D</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Cheque Date
+                    </label>
+                    <input
+                      type="Date"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-green-400 text-end w-5/12 font-semibold">
+                      Total Receive
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                  <div className="flex items-center justify-start gap-4 w-full pt-2">
+                    <label className="text-base text-red-400 text-end w-5/12 font-semibold">
+                      Due Amount
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control text-red-400 w-9/12 px-2 bg-gray-100"
+                      value={0}
+                      readOnly
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center justify-around w-full pt-4">
+            <button className="w-fit font-bold bg-blue-400 px-6 py-2 rounded-lg text-white">
+              View
+            </button>
+            <button className="w-fit font-bold bg-blue-400 px-6 py-2 rounded-lg text-white">
+              Save
+            </button>
+            <button className="w-fit font-bold bg-blue-400 px-6 py-2 rounded-lg text-white">
+              List
+            </button>
           </div>
         </div>
         {/* Payment part end */}
       </div>
+      {openMenus && (
+        <div>
+          <div
+            className="fixed inset-0 bg-[#ffffff79]"
+            onClick={() => setOpenMenus(false)}
+          ></div>
+          <div className="fixed top-20 right-130 bg-white p-5 rounded-lg shadow-lg z-50">
+            <div className="w-200 flex flex-col gap-2">
+              <div className="w-full flex justify-between items-center relative">
+                <h1 className="w-full text-lg text-center border-t-[2px] border-b-[1px]">
+                  Less Information
+                </h1>
+                <button
+                  onClick={() => setOpenMenus(false)}
+                  className="absolute text-2xl font-bold bg-blue-400 px-2"
+                >
+                  X
+                </button>
+              </div>
+              <div className="h-50 overflow-x-auto my-2">
+                <table className="w-full max-w-full  text-sm text-left text-white">
+                  <thead>
+                    <tr className="text-base bg-blue-400">
+                      <th className="py-2 px-5 text-center">Group</th>
+                      <th className="py-2 px-5 text-center">Less</th>
+                      <th className="py-2 px-5 text-center">%/TK</th>
+                      <th className="py-2 px-5 text-center">From</th>
+                      <th className="py-2 px-5 text-center">Amount</th>
+                      <th className="py-2 px-5 text-center">Action</th>
+                    </tr>
+                    <tr className="text-base bg-blue-100">
+                      <th className="pb-2 pl-2 w-2/12">
+                        <select className="w-full bg-white text-base px-1 py-1 text-black">
+                          <option value="select">select</option>
+                        </select>
+                      </th>
+                      <th className="pb-2 pl-2 w-4/12">
+                        <input
+                          type="text"
+                          className="w-full bg-white text-base px-1 py-1 text-black"
+                        />
+                      </th>
+                      <th className="pb-2 pl-2 w-1/12">
+                        <select className="w-full bg-white text-base px-1 py-1 text-black">
+                          <option value="select">TK</option>
+                          <option value="select">%</option>
+                        </select>
+                      </th>
+                      <th className="pb-2 pl-2 w-2/12">
+                        <select className="w-full bg-white text-base px-1 py-1 text-black">
+                          <option value="select">Director</option>
+                          <option value="select">Manager</option>
+                        </select>
+                      </th>
+                      <th className="pb-2 pl-2 w-2/12">
+                        <input
+                          type="text"
+                          className="w-full bg-white text-base px-1 py-1 text-black"
+                        />
+                      </th>
+                      <th className="pb-2 pl-2 text-center">
+                        <button className=" bg-white text-black px-4 py-1 rounded-lg">
+                          Add
+                        </button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="text-base">
+                      <th className="pb-2 pl-2 w-2/12">
+                        <h2 className="w-full text-base text-center px-1 py-1 text-black">
+                          lab
+                        </h2>
+                      </th>
+                      <th className="pb-2 pl-2 w-4/12">
+                        <h2 className="w-full text-base text-center px-1 py-1 text-black">
+                          Less %/TK
+                        </h2>
+                      </th>
+                      <th className="pb-2 pl-2 w-1/12">
+                        <h2 className="w-full text-base text-center px-1 py-1 text-black">
+                          %/Tk
+                        </h2>
+                      </th>
+                      <th className="pb-2 pl-2 w-2/12">
+                        <h2 className="w-full text-base text-center px-1 py-1 text-black">
+                          Less By
+                        </h2>
+                      </th>
+                      <th className="pb-2 pl-2 w-2/12">
+                        <h2 className="w-full text-base text-center px-1 py-1 text-black">
+                          Amount
+                        </h2>
+                      </th>
+                      <th className="pb-2 pl-2 text-center">
+                        <MdDelete className="w-full text-3xl text-center px-1 py-1 text-black" />
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <button
+                onClick={() => setOpenMenus(false)}
+                className="w-fit m-auto text-center font-bold bg-blue-400 px-6 py-2 rounded-lg text-white"
+              >
+                Exit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
