@@ -3,6 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { loggedUser } from "../../../store/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { TfiArrowCircleLeft, TfiArrowCircleRight } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const userData = useSelector((state) => state.userData.user);
@@ -16,7 +17,7 @@ export const Header = () => {
   return (
     <header className="w-full flex items-center justify-between bg-blue-400 text-white px-20 py-2">
       <div className="text-xl flex items-center gap-4">
-        <h1 className="text-xl font-bold">Hospital</h1>
+        <Link to="/" className="text-xl font-bold">Hospital</Link>
         {isNavOpen ? (
           <TfiArrowCircleLeft onClick={() => setNavIsOpen(!isNavOpen)} />
         ) : (

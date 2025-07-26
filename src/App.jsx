@@ -5,8 +5,8 @@ import SignUp from "./pages/SignUp";
 import Layout from "./components/layout/Index";
 import ForgotPassword from "./pages/ForgotPassword"
 import Error from "./pages/Error";
-import Dashboard from "./pages/Dashboard";
 import DiagnosisInvoice from "./pages/DiagnosisInvoice";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path="/login" element={<Login />}/>
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/" element={<Layout/>} >
-            {/* <Route index element={<Dashboard />} /> */}
+            <Route index element={<Dashboard />} />
             <Route path="/DiagnosisInvoice" element={<DiagnosisInvoice />} />
           </Route>
           <Route path="*" element={<Error/>} />
